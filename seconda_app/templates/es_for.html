@@ -53,6 +53,13 @@
  {% for x in list2 reversed %}
  <i>Elemento</i> - {{ x }}</br>
  {% endfor %}
+ <h2>Contenuto del dizionario:</h2>
+ <ul>
+    {% for key,value in my_dict.items%}
+        <li>{{ key }}: {{ value }}</li>
+    {% endfor %}
+ </ul>
+ <!-- Itera e stampa il contenuto di un dizionario-->
  
 </body>
 </html>
