@@ -1,0 +1,22 @@
+{%extends "base.html"%}
+
+{%block content%}
+
+<table border=1>
+    <tr>
+    <th>studenti</th>
+    <th>voti</th>
+    </tr>
+{% for k,v in voti.items %}
+<tr>
+    <td> {{ k }} </td>
+    <td> {{ v }}</td>
+</tr>    
+    
+{% endfor %}
+
+</table>
+
+
+{%endblock content%}
+    

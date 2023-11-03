@@ -1,0 +1,27 @@
+{%extends "base.html"%}
+
+{%block content%}
+
+{% if media < 6 %}
+    {% for i in lista %}
+    <p style="color:red;">{{ forloop.counter }}</p> : {{ i }}<br>
+    {% endfor %}
+    <p>la media è:{{media}}</p>
+
+{% elif media > 6  %}
+    {% for i in lista %}
+    <p style="color:green;">{{ forloop.counter }}</p> : {{ i }}<br>
+    {% endfor %}
+    <p>la media è:{{media}}</p>
+
+{% else %}
+    {% for i in lista %}
+    <p style="color:black;">{{ forloop.counter }}</p> : {{ i }}<br>
+    {% endfor %}
+    <p>la media è:{{media}}</p>
+
+{% endif %} 
+
+
+{%endblock content%}
+    
