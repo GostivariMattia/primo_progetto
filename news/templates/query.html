@@ -1,0 +1,11 @@
+def queryBase(request):
+    #1. tutti gli articoli scritti da giornalisti con un certo cognome
+    articoli_cognome=Articolo.objects.filter(giornalista_cognome='Rossi')
+    #2. Totale
+    numero_totale_articoli = Articolo.objects.count()
+
+    #3. Contare il numero di articoli scritti da un giornalista specifico
+    giornalista_1 =Giornalista.objects.get(id=1)
+    numero_articoli_giornalista_1=Articolo.objects.filter(giornalista=giornalista_1).count()
+
+    #4. Ordinare gli articoli per numero di articoli in ordine decrescente
