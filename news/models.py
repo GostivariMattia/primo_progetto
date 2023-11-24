@@ -19,6 +19,7 @@ class Articolo(models.Model):
     titolo=models.CharField(max_length=100)
     contenuto=models.TextField()
     giornalista=models.ForeignKey(Giornalista,on_delete=models.CASCADE,related_name="articoli")
+    visualizzaioni=models.CharField(max_length=1000)
 
 
     def __str__(self):

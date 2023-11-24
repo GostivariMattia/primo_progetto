@@ -1,11 +1,126 @@
-def queryBase(request):
-    #1. tutti gli articoli scritti da giornalisti con un certo cognome
-    articoli_cognome=Articolo.objects.filter(giornalista_cognome='Rossi')
-    #2. Totale
-    numero_totale_articoli = Articolo.objects.count()
+{%extends "base.html"%}
 
-    #3. Contare il numero di articoli scritti da un giornalista specifico
-    giornalista_1 =Giornalista.objects.get(id=1)
-    numero_articoli_giornalista_1=Articolo.objects.filter(giornalista=giornalista_1).count()
+{%block title%} {{block.super}} | Query {%endblock title%}
 
-    #4. Ordinare gli articoli per numero di articoli in ordine decrescente
+{% block content %}
+<h5>articoli di un certo giornalista</h5>
+{% for articolo in articoli_cognome %}
+<div>
+    {% comment %} <p>{{ articolo.titolo }}</p> {% endcomment %}
+    <p>{{ articolo.contenuto }}</p>
+    <p>{{ articolo.giornalista }}</p>
+</div>
+{%endfor%}
+
+<h5>numero totale di articoli</h5>
+<div>
+<p>{{ numero_totale_articoli }}</p>
+</div>
+
+<h5>numero di articoli scritti da un giornalista specifico</h5>
+<div>
+<p>{{ numero_articoli_giornalista_1 }} </p>
+</div>
+
+<h5>articoli ordinati visualizzazioni decrescenti</h5>
+<div>
+{%for articolo in articoli_ordinati %}
+    <p>{{ articolo.titolo }}</p>
+    <p>{{ articolo.contenuto }}</p>
+    <p>{{ articolo.giornalista }}</p>
+{%endfor%}
+</div>
+
+<h5>articoli senza visualizzazioni</h5>
+<div>
+{%for articolo in articoli_senza_visualizzazioni %}
+    <p>{{ articolo.titolo }}</p>
+    <p>{{ articolo.contenuto }}</p>
+    <p>{{ articolo.giornalista }}</p>
+{%endfor%}
+</div>
+
+<h5>articolo più visualizzato</h5>
+<div>
+    <p>{{ articolo_piu_visualizzato.titolo }}</p>
+    <p>{{ articolo_piu_visualizzato.contenuto }}</p>
+    <p>{{ articolo_piu_visualizzato.giornalista }}</p>
+</div>
+
+<h5>giornalisti nati dopo una certa data</h5>
+<div>
+{%for giornalista in giornalisti_data %}
+    <p>{{ giornalista.nome }}</p>
+    <p>{{ giornalista.cognome }}</p>
+    <p>{{ giornalista.anno_di_nascita }}</p>
+{%endfor%}
+</div>
+
+<h5>articoli pubblicati in una data specifica</h5>
+<div>
+{%for articolo in articoli_del_giorno %}
+    <p>{{ articolo.titolo }}</p>
+    <p>{{ articolo.contenuto }}</p>
+    <p>{{ articolo.giornalista }}</p>
+{%endfor%}
+</div>
+
+<h5>articoli pubblicato in un intervallo di date </h5>
+<div>
+{%for articolo in articoli_periodo %}
+    <p>{{ articolo.titolo }}</p>
+    <p>{{ articolo.contenuto }}</p>
+    <p>{{ articolo.giornalista }}</p>
+{%endfor%}
+</div>
+
+<h5>articoli scritti da giornalisti prima degli anni 80</h5>
+<div>
+{%for articolo in articoli_giornalista %}
+    <p>{{ articolo.titolo }}</p>
+    <p>{{ articolo.contenuto }}</p>
+    <p>{{ articolo.giornalista }}</p>
+{%endfor%}
+</div>
+
+<h5>giornalista più giovane</h5>
+<div>
+    <p>{{ giornalista_giovane.nome }}</p>
+    <p>{{ giornalista_giovane.cognome }}</p>
+    <p>{{ giornalista_giovane.anno_di_nascita }}</p>
+</div>
+
+<h5>giornalista più anziano</h5>
+<div>
+    <p>{{ giornalista_anziano.nome }}</p>
+    <p>{{ giornalista_anziano.cognome }}</p>
+    <p>{{ giornalista_anziano.anno_di_nascita }}</p>
+</div>
+
+<h5>ultimi 5 articoli pubblicati</h5>
+<div>
+{%for articolo in ultimi %}
+    <p>{{ articolo.titolo }}</p>
+    <p>{{ articolo.contenuto }}</p>
+    <p>{{ articolo.giornalista }}</p>
+{%endfor%}
+</div>
+
+<h5>tutti gli articoli con un certo numero di visualizzazioni</h5>
+<div>
+    {%for articolo in articoli_minime_visualizzazioni %}
+        <p>{{ articolo.titolo }}</p>
+        <p>{{ articolo.contenuto }}</p>
+        <p>{{ articolo.giornalista }}</p>
+    {%endfor%}
+</div>
+
+<h5>tutti gli articoli che contengono la parola "importante nel titolo"</h5>
+<div>
+    {%for articolo in articoli_parola %}
+        <p>{{ articolo.titolo }}</p>
+        <p>{{ articolo.contenuto }}</p>
+        <p>{{ articolo.giornalista }}</p>
+    {%endfor%}
+</div>
+{%endblock content%}
