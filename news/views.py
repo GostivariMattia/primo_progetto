@@ -1,6 +1,7 @@
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import Articolo,Giornalista
+import datetime
 # Create your views here.
 
 """
@@ -69,13 +70,13 @@ httpresponse()
 def query_base(request):
     pass
     #1. tutti gli articoli scritti da giornalisti con un certo cognome
-    articoli_cognome=Articolo.objects.filter(giornalista_cognome='Rossi')
+    articoli_cognome=Articolo.objects.filter(giornalista__cognome='Rossi')
     
     #2. Totale
     numero_totale_articoli = Articolo.objects.count()
 
     #3. Contare il numero di articoli scritti da un giornalista specifico
-    giornalista_1 =Giornalista.objects.get(id=1)
+    giornalista_1 = Giornalista.objects.get(id=3)
     numero_articoli_giornalista_1=Articolo.objects.filter(giornalista=giornalista_1).count()
 
     #4. Ordinare gli articoli per numero di articoli in ordine decrescente
@@ -85,7 +86,7 @@ def query_base(request):
     articoli_senza_visualizzazioni = Articolo.objects.filter(visualizzazioni=0)
 
     #6. articolo più visualizzato 
-    articolo_piu_visualizzato = Articolo.objects.filter('-visualizzazioni').first()
+    articolo_piu_visualizzato = Articolo.objects.order_by('-visualizzazioni').first()
 
     #7. tutti i giornalisti nati dopo una certa data
     giornalisti_data=Giornalista.objects.filter(anno_di_nascita__gt=datetime.date(1990, 1, 1))
@@ -113,8 +114,34 @@ def query_base(request):
     articoli_minime_visualizzazioni = Articolo.objects.filter(visualizzazioni__gte=100)
 
     #15. tutti gli articoli che contengono una certa parola nel titolo
-    articoli_parola = Articolo.objects.filter(titolo__incontains='importante')
+    articoli_parola = Articolo.objects.filter(titolo__icontains='importante')
+    #16. articoli pubblicati in un certo mese di anno specifico
+    #nota per poter modificare la data di un articolo togliere la proprietà auto_now=true al field data nel model
+    #poi dare i comandi makemigration e migrate per abblicare le modifiche al database
+    articoli_mese_anno=Articolo.objects.filter(data__month=1, data__year=2023)
+    #17. giornalisti con almeno un articolo con più di 100 visualizzazioni
+    giornalisti_con_articoli_popolari= Giornalista.objects.filter(articoli__visualizzazioni__gte=100).distinct()
+    #UTILIZZO DI PIU CONDIZIONI DI SELEZIONE
+    data=datetime.date(1990,1,1)
+    visualizzazioni=50
+    #per mettere in AND le condizioni separarle con la virgola
+    #18 ...scrivi quali articoli vengono selezionati
+    articoli_con_and=Articolo.objects.filter(giornalista__anno_di_nascita__gt=data, visualizzazioni__gte=visualizzazioni)
+
+    #per mettere le condizioni in OR utilizzare l'operatore Q
+    from django.db.models import Q
+    #19. scrivi quali articoli vengono selezionati
+    articoli_con_or=Articolo.objects.filter(Q(giornalista__anno_di_nascita__gt=data) |Q(visualizzazioni__lte=visualizzazioni))
+    
+    #per il not utilizzare l'operatore Q
+    #20 ... scrivi quali articoli vengono selezionati
     #creare il dizionario context
+    articoli_con_not= Articolo.objects.filter(~Q(giornalista__anno_di_nascita__lt=data))
+    #oppure il metodo exclude
+    # ... spiegala
+    articoli_con_not = Articolo.objects.exclude(giornalista__anno_di_nascita__lt=data)
+    #articolo.objects inizia dalla classe articolo exclude ritorna tutti i giornalisti tranne quelli la cui condizione risulta vera
+
     context = {
         'articolo_cognome': articoli_cognome,
         'numero_totale_articoli':numero_totale_articoli,
@@ -133,6 +160,11 @@ def query_base(request):
         'ultimi':ultimi,
         'articoli_minime_visualizzazioni':articoli_minime_visualizzazioni,
         'articoli_parola':articoli_parola,
+        'articoli_mese_anno':articoli_mese_anno,
+        'giornalisti_con_articoli_popolari':giornalisti_con_articoli_popolari,
+        'articoli_con_and':articoli_con_and,
+        'articoli_con_or':articoli_con_or,
+        'articoli_con_not':articoli_con_not,
     }
     return render(request, 'query.html',context)
  
