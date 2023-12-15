@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%block title%} {{block.super}} | index_root {%endblock title%}
+</head>
+<body>
+    {%block content%}
+    <ul>
+        {% for studente,materie in voti.items%}
+            <li>{{ studente }}</li><br>
+            <ul>
+            {% for dati in materie %}
+            <li>{{ dati.0 }}: {{ dati.1 }}</li><br>
+            {% endfor %}
+            </ul>
+        {% endfor %}
+     </ul>
+
+     {%endblock content%}
+
+    
+</body>
+</html>

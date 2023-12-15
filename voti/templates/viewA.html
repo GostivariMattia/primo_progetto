@@ -8,12 +8,11 @@
 </head>
 <body>
     {%block content%}
-    <ol>
-        <li><a href="/admin">pannello admin</a></li>
-        <li><a href="{% url 'prima_app:index'%}">prima app</a></li>
-        <li><a href="{% url 'seconda_app:index2'%}">seconda app</a></li>
-        <li><a href="{% url 'voti:homepage_voti'%}">voti</a></li>
-    </ol>
+    <ul>
+    {% for i in materie %}
+        <li> {{ i }} </li><br> 
+    {% endfor %}       
+    </ul>
     {%endblock content%}
     
 </body>

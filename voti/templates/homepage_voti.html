@@ -8,12 +8,10 @@
 </head>
 <body>
     {%block content%}
-    <ol>
-        <li><a href="/admin">pannello admin</a></li>
-        <li><a href="{% url 'prima_app:index'%}">prima app</a></li>
-        <li><a href="{% url 'seconda_app:index2'%}">seconda app</a></li>
-        <li><a href="{% url 'voti:homepage_voti'%}">voti</a></li>
-    </ol>
+    <ul>
+        <li><a href="{% url 'voti:viewA' %}">lista materie</a></li>
+        <li><a href="{% url 'voti:viewB' %}">Voti studenti</a></li>       
+    </ul>
     {%endblock content%}
     
 </body>
