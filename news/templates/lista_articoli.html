@@ -1,0 +1,17 @@
+{%extends "base.html"%}
+
+{%block title%} {{block.super}} | Articoli di un giornalista {%endblock title%}
+
+{% block content %}
+
+{% for articolo in articoli%}
+<div>
+<p>{{ articolo.titolo }}</p>
+<p>{{ articolo.contenuto }}</p>
+<p>{{ articolo.giornalista }}</p>
+</div>
+<br>
+{%endfor%}
+
+
+{%endblock content%}
