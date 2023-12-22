@@ -18,4 +18,7 @@ def viewB(request):
     context={'voti':voti}
     return render(request, "viewB.html",context)
 
+#def viewC(request):
+    
+
 
