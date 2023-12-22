@@ -24,30 +24,70 @@
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
-
-        <a class="navbar-brand" href="#">Primo progetto</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-              <div class="dropdown-menu" aria-labelledby="Prima_app">
-                <a class="dropdown-item" href="{% url 'prima_app:homepage'%}">Homepage benvenuto</a>
-                <a class="dropdown-item" href="{% url 'prima_app:homepage'%}">Homepage benvenuto</a>
-                <a class="dropdown-item" href="{% url 'prima_app:welcome'%}">Welcome</a>
-                <a class="dropdown-item" href="{% url 'prima_app:lista'%}">Lista</a>
-                <a class="dropdown-item" href="{% url 'prima_app:chi_siamo'%}">Chi siamo</a>
-                <a class="dropdown-item" href="{% url 'prima_app:variabili'%}">variabili</a>
-              </div>
-              <div class="dropdown-menu" aria-labelledby="Seconda_app">
-                <a class="dropdown-item" href="{% url 'seconda_app:es_if'%}">es if</a>
-                <a class="dropdown-item" href="{% url 'seconda_app:if_else_elif'%}">pagina if_else_elif</a>
-                <a class="dropdown-item" href="{% url 'seconda_app:es_for'%}">es_for</a>
-              </div>
-            
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/">primo progetto</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
         
-      </nav>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
 
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  prima app
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'prima_app:homepage'%}">homepage</a>
+                  <a class="dropdown-item" href="{% url 'prima_app:welcome'%}">welcome</a>
+                  <a class="dropdown-item" href="{% url 'prima_app:lista'%}">lista</a>
+                  <a class="dropdown-item" href="{% url 'prima_app:chi_siamo'%}">chi_siamo</a>
+                  <a class="dropdown-item" href="{% url 'prima_app:variabili'%}">variabili</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  seconda app
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'seconda_app:index2'%}">homepage</a>
+                  <a class="dropdown-item" href="{% url 'seconda_app:es_if'%}">es_if</a>
+                  <a class="dropdown-item" href="{% url 'seconda_app:if_else_elif'%}">if else if</a>
+                  <a class="dropdown-item" href="{% url 'seconda_app:es_for'%}">es_for</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   prova pratica
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'prova_pratica_1:index_prova'%}">homepage</a>
+                  <a class="dropdown-item" href="{% url 'prova_pratica_1:somma'%}">somma</a>
+                  <a class="dropdown-item" href="{% url 'prova_pratica_1:media'%}">media</a>
+                  <a class="dropdown-item" href="{% url 'prova_pratica_1:voti'%}">voti</a>
+                </div>
+              </li>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    voti
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{% url 'voti:homepage_voti'%}">homepage</a>
+                  <a class="dropdown-item" href="{% url 'voti:viewA' %}">somma</a>
+                  <a class="dropdown-item" href="{% url 'voti:viewB' %}">media</a>
+                </div>
+              </li>
+
+
+
+            </ul>
+          </div>
+        </nav>
+
+        
       <div class="container my-4">
         <!-- servirà per inserire i contenuti della pagina -->
         {%block content%}
