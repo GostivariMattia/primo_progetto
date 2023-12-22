@@ -1,0 +1,180 @@
+(InteractiveConsole)
+>>> from news.models import Giornalista
+>>> Giornalista.objects.all()
+<QuerySet []>
+>>> g1=Giornalista(nome="Mario", cognome="Rossi")
+>>> g1.save()
+>>> g2=Giornalista()
+>>> g2.nome = "Pinco"
+>>> g2.cognome= "Pallino" 
+>>> g2.save()
+>>> g1
+<Giornalista: Mario Rossi>
+>>> g1.nome
+'Mario'
+>>> g1.cognome
+'Rossi'
+>>> g2
+<Giornalista: Pinco Pallino>
+>>> g2.cognome
+'Pallino'
+>>> g3=Giornalista(nome="Luigi",cognome="Verdi")
+>>> g3.save()
+>>> g3
+<Giornalista: Luigi Verdi>
+>>> Giornalista.object.create(nome="Nome", cognome="Cognome")
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Giornalista' has no attribute 'object'
+>>> Giornalista.objects.create(nome="Nome",cognome="Cognome")
+<Giornalista: Nome Cognome>
+>>> g1.id
+1
+>>> g3.id
+3
+>>> g2.pk
+2
+>>> Giornalista.objects.get(pk=1)
+<Giornalista: Mario Rossi>
+>>> Giornalista.objects.filter(nome="Mario")
+<QuerySet [<Giornalista: Mario Rossi>]>
+>>> Giornalista.objects.all()
+<QuerySet [<Giornalista: Mario Rossi>, <Giornalista: Pinco Pallino>, <Giornalista: Luigi Verdi>, <Giornalista: Nome Cognome>]>
+>>> giornalisti=Giornalista.objects.all()
+>>> giornalisti
+<QuerySet [<Giornalista: Mario Rossi>, <Giornalista: Pinco Pallino>, <Giornalista: Luigi Verdi>, <Giornalista: Nome Cognome>]>
+>>> Giornalista.objects.exclude(cognome="Rossi")
+<QuerySet [<Giornalista: Pinco Pallino>, <Giornalista: Luigi Verdi>, <Giornalista: Nome 
+Cognome>]>
+>>> for g in Giornalista.objects.all():
+... g.nome
+  File "<console>", line 2
+    g.nome
+    ^
+IndentationError: expected an indented block after 'for' statement on line 1
+>>> for g in Giornalista.objects.all():
+...     g.nome
+... 
+'Mario'
+'Pinco'
+'Luigi'
+'Nome'
+>>> gior=Giornalista.object.get(pk=2)
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: type object 'Giornalista' has no attribute 'object'
+>>> gior=Giornalista.objects.get(pk=2)
+>>> gio
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'gio' is not defined
+>>> gior
+<Giornalista: Pinco Pallino>
+>>> gio.nome="Guido" 
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+NameError: name 'gio' is not defined
+>>> gior.nome="Guido" 
+>>> gior.cognome="Guidi" 
+>>> gior.save()
+>>> Giornalista.objects.all()
+<QuerySet [<Giornalista: Mario Rossi>, <Giornalista: Guido Guidi>, <Giornalista: Luigi Verdi>, <Giornalista: Nome Cognome>]>
+>>> gior=Giornalista.objects.get(pk=1)
+>>> gior
+<Giornalista: Mario Rossi>
+>>> gior.delete()
+(1, {'news.Giornalista': 1})
+>>> Giornalista.objects.all()
+<QuerySet [<Giornalista: Guido Guidi>, <Giornalista: Luigi Verdi>, <Giornalista: Nome Cognome>]>
+>>> from news.models import Articolo
+>>> al=Articolo()
+>>> al.titolo="primo articolo!"
+>>> al.contenuto="lorem ipsum" 
+>>> al.save()
+Traceback (most recent call last):
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.IntegrityError: NOT NULL constraint failed: news_articolo.giornalista_id        
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+              ^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+              ^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+           ^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\5C2324\Documents\django\env\Lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+django.db.utils.IntegrityError: NOT NULL constraint failed: news_articolo.giornalista_id>>> g=Giornalista.objects.get(id=3) 
+>>> g
+<Giornalista: Luigi Verdi>
+>>> al.giornalista=g
+>>> al.save()
+>>> al
+<Articolo: primo articolo!>
+>>> al.titolo
+'primo articolo!'
+>>> al.contenuto
+'lorem ipsum'
+>>> al.giornalista
+<Giornalista: Luigi Verdi>
+>>> nuovo=Articolo(titolo="Secondo articolo",contenuto="il mio secondo articolo",giornalista=Giornalista.objects.get(id=3))
+>>> nuovo.save()
+>>> nuovo
+<Articolo: Secondo articolo>
+>>> nuovo.titolo
+'Secondo articolo'
+>>> nuovo.contenuto
+'il mio secondo articolo'
+>>> nuovo.giornalista
+<Giornalista: Luigi Verdi>
+>>> nuovo.giornalista id
+  File "<console>", line 1
+    nuovo.giornalista id
+                      ^^
+SyntaxError: incomplete input
+>>> nuovo.giornalista_id
+3
+>>> x=Giornalista.objects.get(id=3)
+>>> x
+<Giornalista: Luigi Verdi>
+>>> x.articoli.all()
+<QuerySet [<Articolo: primo articolo!>, <Articolo: Secondo articolo>]>
+>>>

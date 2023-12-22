@@ -1,0 +1,31 @@
+{%extends "base.html"%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {%block title%} {{block.super}} | index {%endblock title%}
+
+</head>
+<body>
+    {%block content%}
+
+        {% if var1 < var2 %}
+        <p style="color:red;">{{var1}}</p>
+        <p style="color:green;">{{var2}}</p>
+        <p>la somma è:{{var_somma}}</p>
+        {% elif var1 > var2  %}
+        <p style="color:green;">{{var1}}</p>
+        <p style="color:red;">{{var2}}</p>
+        <p>la somma è:{{var_somma}}</p>
+        {% else %}
+        <p style="color:black;">{{var1}}</p>
+        <p style="color:black;">{{var2}}</p>
+        <p>la somma è:{{var_somma}}</p>
+    {% endif %}
+
+
+    {%endblock content%}
+    
+</body>
+</html>
