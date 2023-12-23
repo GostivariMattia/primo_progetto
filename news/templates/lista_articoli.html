@@ -5,12 +5,21 @@
 {% block content %}
 
 {% for articolo in articoli%}
-<div>
-<p>{{ articolo.titolo }}</p>
-<p>{{ articolo.contenuto }}</p>
-<p>{{ articolo.giornalista }}</p>
-</div>
-<br>
+<p><strong> Titolo: </strong> 
+  {% comment %} metodo non ottimale per creare il link {% endcomment %}
+  <a href="news/articoli/{{ articoli.id }}">{{ articolo.titolo }}</a>
+</p>
+
+<p><strong>contenuto: </strong>
+articolo.contenuto
+</p>
+
+{% comment %} metodo ottimale per creare il link {% endcomment %}
+<p><strong>Autore:</strong>
+<a href={% url 'news:giornalista_detail' articolo.giornalista.id %}>{{ articolo.giornalista }}</a>
+</p>
+<hr>
+
 {%endfor%}
 
 

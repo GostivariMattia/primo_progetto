@@ -45,6 +45,12 @@ def articoloDetailView(request,pk):
     return render(request, "articolo_detail.html",context)
 
 
+def giornalistaDetailView(request,pk):
+    giornalista = get_object_or_404(Giornalista, pk=pk)
+    context = {"giornalista": giornalista}
+    return render(request, "giornalista_detail.html",context)
+
+
 def listaArticoli(request,pk=None):
     if(pk==None):
         articoli=Articolo.objects.all()
