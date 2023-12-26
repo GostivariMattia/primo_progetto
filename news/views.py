@@ -47,7 +47,10 @@ def articoloDetailView(request,pk):
 
 def giornalistaDetailView(request,pk):
     giornalista = get_object_or_404(Giornalista, pk=pk)
-    context = {"giornalista": giornalista}
+    articoli = Articolo.objects.filter(giornalista_id=pk)
+    context = {'giornalista': giornalista,
+               'articoli':articoli,
+               }
     return render(request, "giornalista_detail.html",context)
 
 
@@ -59,7 +62,10 @@ def listaArticoli(request,pk=None):
     context ={
         'articoli':articoli,
     }
-    return render(request, 'lista_articoli.html',context)
+    return render(request, "lista_articoli.html",context)
+
+def indexnews(request):
+    return render(request, "indexnews.html")
 
 """
 nella prima versione le variabili a e g erano stringe le quali ad a tramite un ciclo 
