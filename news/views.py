@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
-from .models import Articolo,Giornalista
+from .models import *
 import datetime
 # Create your views here.
 
@@ -217,7 +217,7 @@ def articolo_api(request,pk):
         articolo=Articolo.objects.get(pk=pk)
         data={'articoli':{"titolo":articolo.titolo,
                       "contenuto":articolo.contenuto,
-                      "giornalista":articolo.giornalista,
+                      "giornalista":articolo.giornalista.nome,
                       "visualizzazioni":articolo.visualizzazioni,
                       "data":articolo.data}}
         response=JsonResponse(data)
