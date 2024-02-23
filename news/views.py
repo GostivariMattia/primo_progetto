@@ -205,4 +205,27 @@ def giornalista_api(request,pk):
         },
         status=404)
     return response
- 
+
+def articoli_list_api(request):
+    articolo=Articolo.objects.all()
+    data={'articoli':list(articolo.values("titolo","contenuto","giornalista","visualizzazioni","data"))}
+    response=JsonResponse(data)
+    return response
+
+def articolo_api(request,pk):
+    try:
+        articolo=Articolo.objects.get(pk=pk)
+        data={'articoli':{"titolo":articolo.titolo,
+                      "contenuto":articolo.contenuto,
+                      "giornalista":articolo.giornalista,
+                      "visualizzazioni":articolo.visualizzazioni,
+                      "data":articolo.data}}
+        response=JsonResponse(data)
+    except Articolo.DoesNotExist:
+        response=JsonResponse({"error":{'code':404,'message':'articolo non trovato'}},
+                              status=404)
+    return response
+
+
+
+                        
