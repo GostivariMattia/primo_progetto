@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'seconda_app',
     'news',
     'voti',
+    'products',
 ]
 
 MIDDLEWARE = [
